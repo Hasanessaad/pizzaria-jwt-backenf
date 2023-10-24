@@ -3,6 +3,7 @@ package br.com.contas.demo.repository.Controller;
 import br.com.contas.demo.controller.ClientController;
 import br.com.contas.demo.dto.AdressDTO;
 import br.com.contas.demo.dto.ClientDTO;
+import br.com.contas.demo.entity.Adress;
 import br.com.contas.demo.entity.Client;
 import br.com.contas.demo.service.ClientService;
 import jakarta.validation.Validation;
@@ -73,13 +74,14 @@ public class ClientControllerTest {
         // Arrange
         ClientDTO clientDTO = new ClientDTO("John Doe", "1234567890", "12345678901");
         Client expectedClient = new Client(); // You should create an expected client object here.
-        when(service.create(clientDTO)).thenReturn(expectedClient);
+        ResponseEntity<Client> createResponse = new ResponseEntity<>(expectedClient,HttpStatus.OK);
+        when(service.create(clientDTO)).thenReturn(createResponse);
 
         // Act
-        Client result = controller.create(clientDTO);
+        ResponseEntity<Client> result = controller.create(clientDTO);
 
         // Assert
-        assertEquals(expectedClient, result);
+        assertEquals(HttpStatus.OK, result.getStatusCode());
     }
 
     @Test
