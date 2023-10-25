@@ -19,36 +19,33 @@ public class ItemController {
     @Autowired
     private ItemService service;
 
-@GetMapping("/findall")
+    @GetMapping("/findall")
 
-public List<Item> Findall() {
-    return service.Findall();
-}
+    public List<Item> Findall() {
+        return service.Findall();
+    }
 
-@GetMapping("/codigo")
-public Optional<Item> FindByCOdigo(@RequestParam String codigo) {
-    return service.FindByCodigo(codigo);
-}
+    @GetMapping("/codigo")
+    public Optional<Item> FindByCOdigo(@RequestParam String codigo) {
+        return service.FindByCodigo(codigo);
+    }
 
-    @PostMapping
-
-    public ResponseEntity<Item> create (@RequestBody
-    ItemDTO itemDTO) {
+    @PostMapping("/create")
+    public ResponseEntity<Item> create(@RequestBody ItemDTO itemDTO) {
 
         return service.create(itemDTO);
     }
 
-@PutMapping("/update")
-public ResponseEntity<Object> update(@RequestBody ItemDTO itemDTO, @RequestParam Long id){
-    return service.update(id, itemDTO);
-}
+    @PutMapping("/update")
+    public ResponseEntity<Object> update(@RequestBody ItemDTO itemDTO, @RequestParam Long id) {
+        return service.update(id, itemDTO);
+    }
 
-@DeleteMapping
-public ResponseEntity<Object> Delete(@RequestParam long id){
+    @DeleteMapping
+    public ResponseEntity<Object> Delete(@RequestParam long id) {
 
-    return service.delete(id);
-}
-
+        return service.delete(id);
+    }
 
 
 }

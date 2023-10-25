@@ -21,25 +21,29 @@ public class OrderService {
     private OrdersRepository repository;
 
 
-    public List<Orders> Findall() { return repository.findAll();}
+    public List<Orders> Findall() {
+        return repository.findAll();
+    }
 
-    public List<Orders> findByStatus(Status name) { return repository.findByStatus(name);}
+    public List<Orders> findByStatus(Status name) {
+        return repository.findByStatus(name);
+    }
 
-    public ResponseEntity<Object> update (Long id, OrdersDTO orderDTO){
+    public ResponseEntity<Object> update(Long id, OrdersDTO orderDTO) {
         Optional<Orders> order_update = repository.findById(id);
-        if ( order_update.isEmpty()) {
+        if (order_update.isEmpty()) {
             ResponseEntity<Object> objectResponseEntity = new ResponseEntity<>(HttpStatus.BAD_REQUEST);
             return objectResponseEntity;
         } else {
             Orders order = order_update.get();
-            BeanUtils.copyProperties(orderDTO,order);
+            BeanUtils.copyProperties(orderDTO, order);
             return ResponseEntity.ok(order_update);
 
         }
 
     }
 
-    public ResponseEntity<Orders> create(OrdersDTO orderDTO){
+    public ResponseEntity<Orders> create(OrdersDTO orderDTO) {
 
         try {
             Orders order = new Orders();
@@ -49,13 +53,10 @@ public class OrderService {
 
             return ResponseEntity.ok(order);
         } catch (Exception e) {
-         return new ResponseEntity<>(HttpStatus.BAD_REQUEST);}
+            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+        }
 
     }
-
-
-
-
 
 
 }

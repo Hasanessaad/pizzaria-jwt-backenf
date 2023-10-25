@@ -11,26 +11,25 @@ public class Item {
     @Column(name = "id", nullable = false)
     private Long id;
 
-
-
     private String codigo;
     private Float preco;
     private Boolean pizza;
     private Integer tamanho;
     private String extra;
     private String remove;
-@ManyToMany
+    @ManyToMany
     private List<Sabor> sabor;
 
     public Item() {
     }
 
-    public Item( String codigo, Float preco, Boolean pizza) {
+    public Item(String codigo, Float preco, Boolean pizza) {
 
         this.codigo = codigo;
         this.preco = preco;
         this.pizza = pizza;
     }
+
     public Item(Long id, String codigo, Float preco, Boolean pizza) {
         this.id = id;
         this.codigo = codigo;

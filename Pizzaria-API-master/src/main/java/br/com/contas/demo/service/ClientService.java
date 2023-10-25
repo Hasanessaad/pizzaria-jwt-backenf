@@ -83,7 +83,7 @@ public class ClientService {
             BeanUtils.copyProperties(adressdto, adress);
             adressRepository.save(adress);
             adresses.add(adress);
-            client.setEndereco(adresses);
+            client.setAdress(adresses);
             repository.save(client);
 
 

@@ -14,6 +14,9 @@ public class Adress {
     private String cidade;
     private String rua;
     private Integer numero_rua;
+
+
+
     @ManyToMany
     private List<Client> cliente;
 
@@ -57,5 +60,13 @@ public class Adress {
 
     public void setNumero_rua(Integer numero_rua) {
         this.numero_rua = numero_rua;
+    }
+
+    public List<Client> getCliente() {
+        return cliente;
+    }
+
+    public void setCliente(List<Client> cliente) {
+        this.cliente = cliente;
     }
 }
