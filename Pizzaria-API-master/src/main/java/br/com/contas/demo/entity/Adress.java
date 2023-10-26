@@ -15,8 +15,6 @@ public class Adress {
     private String rua;
     private Integer numero_rua;
 
-
-
     @ManyToMany
     private List<Client> cliente;
 

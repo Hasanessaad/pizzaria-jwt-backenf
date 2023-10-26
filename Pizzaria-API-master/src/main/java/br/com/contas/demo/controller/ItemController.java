@@ -1,7 +1,11 @@
 package br.com.contas.demo.controller;
 
+import br.com.contas.demo.dto.AdressDTO;
 import br.com.contas.demo.dto.ItemDTO;
+import br.com.contas.demo.dto.SaborDTO;
+import br.com.contas.demo.entity.Client;
 import br.com.contas.demo.entity.Item;
+import br.com.contas.demo.entity.Sabor;
 import br.com.contas.demo.service.ItemService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -45,6 +49,13 @@ public class ItemController {
     public ResponseEntity<Object> Delete(@RequestParam long id) {
 
         return service.delete(id);
+    }
+
+    @PutMapping("/sabor")
+    public ResponseEntity<Object> AddSabor(@RequestBody SaborDTO saborDTO, @RequestParam Long id) {
+        Item item = service.AddSabor(id, saborDTO);
+
+        return ResponseEntity.ok(item);
     }
 
 

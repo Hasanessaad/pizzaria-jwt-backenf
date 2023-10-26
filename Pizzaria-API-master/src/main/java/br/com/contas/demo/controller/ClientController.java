@@ -52,7 +52,6 @@ public class ClientController {
     }
 
     @PutMapping("/adress")
-
     public ResponseEntity<Object> addAdress(@RequestBody AdressDTO adressDTO, @RequestParam Long id) {
         Client cliente = service.AddAdress(id, adressDTO);
 

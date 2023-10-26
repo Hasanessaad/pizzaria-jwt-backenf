@@ -17,6 +17,9 @@ public class Item {
     private Integer tamanho;
     private String extra;
     private String remove;
+
+
+
     @ManyToMany
     private List<Sabor> sabor;
 
@@ -101,5 +104,17 @@ public class Item {
 
     public void setId(Long id) {
         this.id = id;
+    }
+
+    public List<Sabor> getSabor() {
+        return sabor;
+    }
+
+    public void setSabor(List<Sabor> sabor) {
+        this.sabor = sabor;
+    }
+
+    public void addSabor(Sabor sabor) {
+        this.sabor.add(sabor);
     }
 }

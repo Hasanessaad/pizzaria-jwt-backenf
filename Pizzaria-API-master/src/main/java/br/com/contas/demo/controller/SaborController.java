@@ -29,7 +29,7 @@ public Sabor findByNome(@RequestParam String nome) {
     return service.findByNome(nome);
 }
 
-    @PostMapping
+    @PostMapping("/create")
 
     public ResponseEntity<Sabor> create (@RequestBody
     SaborDTO saborDTO) {
@@ -42,7 +42,7 @@ public ResponseEntity<Object> update(@RequestBody SaborDTO saborDTO, @RequestPar
     return service.update(id, saborDTO);
 }
 
-@DeleteMapping
+@DeleteMapping("/delete")
 public ResponseEntity<Object> Delete(@RequestParam long id){
 
     return service.delete(id);
