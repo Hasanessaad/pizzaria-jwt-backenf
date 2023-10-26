@@ -27,7 +27,9 @@ public class Client {
     private List<Adress> adress;
 
     public Client(String nome, String phone, String cpf) {
-
+        this.nome = nome;
+        this.phone = phone;
+        this.cpf = cpf;
     }
 
     public Client() {
@@ -49,15 +51,15 @@ public class Client {
         this.cpf = cpf;
     }
 
-    public List<Adress> getEndereco() {
+    public List<Adress> getAdress() {
         return adress;
     }
 
-    public void setEndereco(List<Adress> adress) {
+    public void setAdress(List<Adress> adress) {
         this.adress = adress;
     }
 
-    public void addEndereco(Adress adress) {
+    public void addAdress(Adress adress) {
         this.adress.add(adress);
     }
 

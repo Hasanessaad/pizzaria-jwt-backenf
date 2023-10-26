@@ -1,4 +1,5 @@
-package br.com.contas.demo.ControllerTest;
+package br.com.contas.demo.repository.Controller;
+
 
 import br.com.contas.demo.controller.AdressController;
 import br.com.contas.demo.dto.AdressDTO;

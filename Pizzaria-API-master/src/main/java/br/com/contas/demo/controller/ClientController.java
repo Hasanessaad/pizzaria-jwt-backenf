@@ -22,11 +22,11 @@ public class ClientController {
     @Autowired
     private ClientService service;
 
-@GetMapping("/findall")
+    @GetMapping("/findall")
 
-public List<Client> Findall() {
-    return service.Findall();
-}
+    public List<Client> Findall() {
+        return service.Findall();
+    }
 
     @GetMapping("/name")
 
@@ -34,35 +34,29 @@ public List<Client> Findall() {
         return service.FindByName(nome);
     }
 
-    @PostMapping
-
-    public Client create (@Valid @RequestBody
-    ClientDTO clientDTO) {
-
-   return service.create(clientDTO);
-
+    @PostMapping("/create")
+    public ResponseEntity<Client> create(@Valid @RequestBody ClientDTO clientDTO) {
+        return service.create(clientDTO);
     }
 
-@PutMapping("/update")
-public ResponseEntity<Client> update(@RequestBody ClientDTO clientDTO, @RequestParam Long id){
-    ResponseEntity<Client> resposta =  service.update(id, clientDTO);
-    return new ResponseEntity<Client>(HttpStatus.OK);
-}
+    @PutMapping("/update/id")
+    public ResponseEntity<Client> update(@RequestBody ClientDTO clientDTO, @RequestParam Long id) {
+        ResponseEntity<Client> resposta = service.update(id, clientDTO);
+        return new ResponseEntity<Client>(HttpStatus.OK);
+    }
 
-@DeleteMapping
-public ResponseEntity<Object> Delete(@RequestParam long id){
+    @DeleteMapping("delete/id")
+    public ResponseEntity<Object> Delete(@RequestParam long id) {
 
-    return service.delete(id);
-}
+        return service.delete(id);
+    }
 
-@PutMapping("/adress")
+    @PutMapping("/adress")
+    public ResponseEntity<Object> addAdress(@RequestBody AdressDTO adressDTO, @RequestParam Long id) {
+        Client cliente = service.AddAdress(id, adressDTO);
 
-    public ResponseEntity<Object> addAdress (@RequestBody AdressDTO adressDTO, @RequestParam Long id){
-    Client cliente = service.AddAdress(id, adressDTO);
-
-    return ResponseEntity.ok(cliente);
-}
-
+        return ResponseEntity.ok(cliente);
+    }
 
 
 }
