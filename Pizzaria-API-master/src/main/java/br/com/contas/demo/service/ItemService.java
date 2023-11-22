@@ -19,25 +19,29 @@ public class ItemService {
     private ItemRepository repository;
 
 
-    public List<Item> Findall() { return repository.findAll();}
+    public List<Item> Findall() {
+        return repository.findAll();
+    }
 
-    public Optional<Item> FindByCodigo(String name) { return repository.findByCodigo(name);}
+    public Optional<Item> FindByCodigo(String name) {
+        return repository.findByCodigo(name);
+    }
 
-    public ResponseEntity<Object> update (Long id, ItemDTO itemDTO){
+    public ResponseEntity<Object> update(Long id, ItemDTO itemDTO) {
         Optional<Item> iteme_update = repository.findById(id);
-        if ( iteme_update.isEmpty()) {
+        if (iteme_update.isEmpty()) {
             ResponseEntity<Object> objectResponseEntity = new ResponseEntity<>(HttpStatus.BAD_REQUEST);
             return objectResponseEntity;
         } else {
             Item item = iteme_update.get();
-            BeanUtils.copyProperties(itemDTO,item);
+            BeanUtils.copyProperties(itemDTO, item);
             return ResponseEntity.ok(iteme_update);
 
         }
 
     }
 
-    public ResponseEntity<Item> create(ItemDTO itemDTO){
+    public ResponseEntity<Item> create(ItemDTO itemDTO) {
 
         try {
             Item iteme = new Item();
@@ -47,30 +51,28 @@ public class ItemService {
 
             return ResponseEntity.ok(iteme);
         } catch (Exception e) {
-         return new ResponseEntity<>(HttpStatus.BAD_REQUEST);}
-
-    }
-
-
-    public ResponseEntity<Object> delete ( Long id){
-        Optional<Item> iteme_optional = repository.findById(id) ;
-        if ( iteme_optional.isEmpty()) {
-            ResponseEntity<Object> objectResponseEntity = new ResponseEntity<>(HttpStatus.BAD_REQUEST);
-            return objectResponseEntity;
-        } else {
-
-
-        Item iteme = iteme_optional.get();
-        repository.delete(iteme);
-        return ResponseEntity.ok("Iteme deletado com sucesso");
-
-
+            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
         }
 
     }
 
 
+    public ResponseEntity<Object> delete(Long id) {
+        Optional<Item> iteme_optional = repository.findById(id);
+        if (iteme_optional.isEmpty()) {
+            ResponseEntity<Object> objectResponseEntity = new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+            return objectResponseEntity;
+        } else {
 
+
+            Item iteme = iteme_optional.get();
+            repository.delete(iteme);
+            return ResponseEntity.ok("Iteme deletado com sucesso");
+
+
+        }
+
+    }
 
 
 }

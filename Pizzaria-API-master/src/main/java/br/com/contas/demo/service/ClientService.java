@@ -30,17 +30,21 @@ public class ClientService {
     }
 
 
-    public List<Client> Findall() { return repository.findAll();}
+    public List<Client> Findall() {
+        return repository.findAll();
+    }
 
-    public List<Optional<Client>> FindByName(String name) { return Collections.singletonList(repository.findByNome(name));}
+    public List<Optional<Client>> FindByName(String name) {
+        return Collections.singletonList(repository.findByNome(name));
+    }
 
-    public ResponseEntity<Client> update (Long id, ClientDTO clientDTO){
+    public ResponseEntity<Client> update(Long id, ClientDTO clientDTO) {
         Optional<Client> cliente_update = repository.findById(id);
-        if ( cliente_update.isEmpty()) {
+        if (cliente_update.isEmpty()) {
             throw new RuntimeException("cliente nao existe");
         } else {
             Client client = cliente_update.get();
-            BeanUtils.copyProperties(clientDTO,client);
+            BeanUtils.copyProperties(clientDTO, client);
             repository.save(client);
 
             return new ResponseEntity<Client>(HttpStatus.OK);
@@ -49,7 +53,7 @@ public class ClientService {
 
     }
 
-    public Client create( ClientDTO clientDTO){
+    public Client create(ClientDTO clientDTO) {
 
         try {
             Client cliente = new Client();
@@ -59,17 +63,16 @@ public class ClientService {
 
             return cliente;
         } catch (Exception e) {
-         throw new RuntimeException(e.getCause().getMessage()) ;
-                 }
+            throw new RuntimeException(e.getCause().getMessage());
+        }
 
     }
 
 
-
     public Client AddAdress(Long id, AdressDTO adressdto) {
         Optional<Client> cliente_update = repository.findById(id);
-        if ( cliente_update.isEmpty()) {
-            throw new RuntimeException() ;
+        if (cliente_update.isEmpty()) {
+            throw new RuntimeException();
         } else {
             Client client = cliente_update.get();
             List<Adress> adresses = new ArrayList<>();
@@ -82,32 +85,28 @@ public class ClientService {
             repository.save(client);
 
 
-
             return client;
 
         }
 
     }
 
-    public ResponseEntity<Object> delete ( Long id){
-        Optional<Client> cliente_optional = repository.findById(id) ;
-        if ( cliente_optional.isEmpty()) {
+    public ResponseEntity<Object> delete(Long id) {
+        Optional<Client> cliente_optional = repository.findById(id);
+        if (cliente_optional.isEmpty()) {
             ResponseEntity<Object> objectResponseEntity = new ResponseEntity<>(HttpStatus.BAD_REQUEST);
             return objectResponseEntity;
         } else {
 
 
-        Client cliente = cliente_optional.get();
-        repository.delete(cliente);
-        return ResponseEntity.ok("Cliente deletado com sucesso");
+            Client cliente = cliente_optional.get();
+            repository.delete(cliente);
+            return ResponseEntity.ok("Cliente deletado com sucesso");
 
 
         }
 
     }
-
-
-
 
 
 }

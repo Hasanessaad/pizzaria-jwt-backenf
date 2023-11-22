@@ -11,21 +11,22 @@ import java.time.LocalDate;
 
 @Controller
 @RestController
+@CrossOrigin(origins = "*")
 @RequestMapping("/Report")
 public class ReportController {
 
     @Autowired
     private ReportService service;
 
-@GetMapping ( "/Period")
-public ResponseEntity<Report> periodReport(@RequestParam String day1, String day2) {
-    LocalDate start = LocalDate.parse(day1);
-    LocalDate end = LocalDate.parse(day1);
-    return service.GetReport(start,end);
+    @GetMapping("/Period")
+    public ResponseEntity<Report> periodReport(@RequestParam String day1, String day2) {
+        LocalDate start = LocalDate.parse(day1);
+        LocalDate end = LocalDate.parse(day1);
+        return service.GetReport(start, end);
 
-}
+    }
 
-    @GetMapping ( "/day")
+    @GetMapping("/day")
     public ResponseEntity<Report> periodReport(@RequestParam String day1) {
         LocalDate day = LocalDate.parse(day1);
         return service.GetReportDay(day);

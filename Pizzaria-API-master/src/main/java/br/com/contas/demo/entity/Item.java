@@ -11,8 +11,6 @@ public class Item {
     @Column(name = "id", nullable = false)
     private Long id;
 
-
-
     private String codigo;
     private Float preco;
     private Boolean pizza;

@@ -14,37 +14,38 @@ import java.util.List;
 
 @Controller
 @RestController
+@CrossOrigin(origins = "*")
 @RequestMapping("/Order")
 public class OrderController {
 
     @Autowired
     private OrderService service;
 
-@GetMapping("/findall")
+    @GetMapping("/findall")
 
-public List<Orders> Findall() {
-    return service.Findall();
-}
+    public List<Orders> Findall() {
+        return service.Findall();
+    }
 
-@GetMapping("/nome")
-public List<Orders> findByStatus(@RequestParam Status status) {
-    return service.findByStatus(status);
-}
+    @GetMapping("/nome")
+    public List<Orders> findByStatus(@RequestParam Status status) {
+        return service.findByStatus(status);
+    }
 
     @PostMapping
 
-    public ResponseEntity<Orders> create (@RequestBody
-    OrdersDTO orderDTO) {
+    public ResponseEntity<Orders> create(@RequestBody
+                                         OrdersDTO orderDTO) {
 
         return service.create(orderDTO);
-    };
+    }
 
-@PutMapping("/update")
-public ResponseEntity<Object> update(@RequestBody OrdersDTO orderDTO, @RequestParam Long id){
-    return service.update(id, orderDTO);
-}
+    ;
 
-
+    @PutMapping("/update")
+    public ResponseEntity<Object> update(@RequestBody OrdersDTO orderDTO, @RequestParam Long id) {
+        return service.update(id, orderDTO);
+    }
 
 
 }

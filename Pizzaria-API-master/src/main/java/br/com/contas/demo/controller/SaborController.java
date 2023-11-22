@@ -12,42 +12,42 @@ import java.util.List;
 
 @Controller
 @RestController
+@CrossOrigin(origins = "*")
 @RequestMapping("/saborDTO")
 public class SaborController {
 
     @Autowired
     private SaborService service;
 
-@GetMapping("/findall")
+    @GetMapping("/findall")
 
-public List<Sabor> Findall() {
-    return service.Findall();
-}
+    public List<Sabor> Findall() {
+        return service.Findall();
+    }
 
-@GetMapping("/nome")
-public Sabor findByNome(@RequestParam String nome) {
-    return service.findByNome(nome);
-}
+    @GetMapping("/nome")
+    public Sabor findByNome(@RequestParam String nome) {
+        return service.findByNome(nome);
+    }
 
     @PostMapping
 
-    public ResponseEntity<Sabor> create (@RequestBody
-    SaborDTO saborDTO) {
+    public ResponseEntity<Sabor> create(@RequestBody
+                                        SaborDTO saborDTO) {
 
         return service.create(saborDTO);
     }
 
-@PutMapping("/update")
-public ResponseEntity<Object> update(@RequestBody SaborDTO saborDTO, @RequestParam Long id){
-    return service.update(id, saborDTO);
-}
+    @PutMapping("/update")
+    public ResponseEntity<Object> update(@RequestBody SaborDTO saborDTO, @RequestParam Long id) {
+        return service.update(id, saborDTO);
+    }
 
-@DeleteMapping
-public ResponseEntity<Object> Delete(@RequestParam long id){
+    @DeleteMapping
+    public ResponseEntity<Object> Delete(@RequestParam long id) {
 
-    return service.delete(id);
-}
-
+        return service.delete(id);
+    }
 
 
 }
