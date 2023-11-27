@@ -1,8 +1,10 @@
 package br.com.contas.demo.service;
 
+import br.com.contas.demo.dto.AdressDTO;
+import br.com.contas.demo.dto.ItemDTO;
 import br.com.contas.demo.dto.OrdersDTO;
-import br.com.contas.demo.entity.Orders;
-import br.com.contas.demo.entity.Status;
+import br.com.contas.demo.entity.*;
+import br.com.contas.demo.repository.ItemRepository;
 import br.com.contas.demo.repository.OrdersRepository;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,6 +13,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -20,6 +23,8 @@ public class OrderService {
     @Autowired
     private OrdersRepository repository;
 
+    @Autowired
+    private ItemRepository itemRepository;
 
     public List<Orders> Findall() {
         return repository.findAll();
@@ -38,9 +43,7 @@ public class OrderService {
             Orders order = order_update.get();
             BeanUtils.copyProperties(orderDTO, order);
             return ResponseEntity.ok(order_update);
-
         }
-
     }
 
     public ResponseEntity<Orders> create(OrdersDTO orderDTO) {
@@ -58,5 +61,26 @@ public class OrderService {
 
     }
 
+    public Orders AddItem(Long id, ItemDTO itemDTO) {
+        Optional<Orders> orders_update = repository.findById(id);
+        if (orders_update.isEmpty()) {
+            throw new RuntimeException();
+        } else {
+            Orders orders = orders_update.get();
+            List<Item> itemses = new ArrayList<>();
+            Item items = new Item();
+
+            BeanUtils.copyProperties(itemDTO, items);
+            itemRepository.save(items);
+            itemses.add(items);
+            orders.setItems(itemses);
+            repository.save(orders);
+
+
+            return orders;
+
+        }
+
+    }
 
 }

@@ -38,7 +38,7 @@ public class Orders {
         this.time   = data.toLocalTime();
         this.payment = payment;
         this.status = status;
-        Description = description;
+        this.Description = description;
         this.cliente = cliente;
         this.items = items;
         this.day = data.toLocalDate();

@@ -6,6 +6,7 @@ import br.com.contas.demo.entity.Adress;
 import br.com.contas.demo.entity.Client;
 import br.com.contas.demo.repository.Adress_repository;
 import br.com.contas.demo.repository.Client_Repository;
+import jakarta.transaction.Transactional;
 import org.springframework.beans.BeanUtils;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -17,6 +18,7 @@ import java.util.List;
 import java.util.Optional;
 
 @Service
+@Transactional
 public class ClientService {
 
 
@@ -53,7 +55,8 @@ public class ClientService {
 
     }
 
-    public Client create(ClientDTO clientDTO) {
+    public ResponseEntity<Client> create(ClientDTO clientDTO) {
+
 
         try {
             Client cliente = new Client();
@@ -61,9 +64,10 @@ public class ClientService {
 
             repository.save(cliente);
 
-            return cliente;
+            return ResponseEntity.ok(cliente);
         } catch (Exception e) {
-            throw new RuntimeException(e.getCause().getMessage());
+            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+
         }
 
     }
@@ -81,7 +85,7 @@ public class ClientService {
             BeanUtils.copyProperties(adressdto, adress);
             adressRepository.save(adress);
             adresses.add(adress);
-            client.setEndereco(adresses);
+            client.setAdress(adresses);
             repository.save(client);
 
 

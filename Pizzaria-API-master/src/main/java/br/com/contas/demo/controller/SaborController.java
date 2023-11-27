@@ -30,13 +30,14 @@ public class SaborController {
         return service.findByNome(nome);
     }
 
-    @PostMapping
+    @PostMapping("/create")
 
     public ResponseEntity<Sabor> create(@RequestBody
                                         SaborDTO saborDTO) {
 
         return service.create(saborDTO);
     }
+
 
     @PutMapping("/update")
     public ResponseEntity<Object> update(@RequestBody SaborDTO saborDTO, @RequestParam Long id) {
@@ -45,7 +46,6 @@ public class SaborController {
 
     @DeleteMapping
     public ResponseEntity<Object> Delete(@RequestParam long id) {
-
         return service.delete(id);
     }
 

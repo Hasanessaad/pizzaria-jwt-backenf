@@ -13,6 +13,7 @@ import java.util.List;
 
 @Controller
 @RestController
+
 @CrossOrigin(origins = "*")
 @RequestMapping("/Delivery")
 public class DeliveryController {
@@ -26,6 +27,7 @@ public class DeliveryController {
         return service.Findall();
     }
 
+
     @GetMapping("/nome")
     private ResponseEntity<List<Delivery>> findByNome(@RequestParam MetodoEntrega nome) {
         return ResponseEntity.ok(service.FindByMetodoEntrega(nome));
@@ -36,6 +38,8 @@ public class DeliveryController {
     public Delivery create(@RequestBody
                            DeliveryDTO deliveryDTO) {
 
+    @PostMapping("/create")
+    public Delivery create(@RequestBody DeliveryDTO deliveryDTO) {
         return service.create(deliveryDTO);
     }
 

@@ -1,10 +1,12 @@
 package br.com.contas.demo.dto;
 
 
+import br.com.contas.demo.entity.Adress;
 import jakarta.validation.Valid;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
 import lombok.Data;
+import lombok.extern.java.Log;
 import org.hibernate.validator.constraints.br.CPF;
 import org.springframework.http.HttpStatus;
 import org.springframework.validation.FieldError;
@@ -13,6 +15,7 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseStatus;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 @Data
@@ -30,6 +33,8 @@ public class ClientDTO {
     private String phone;
     @CPF(message = "formato invalido")
     private String cpf;
+
+
 
     @ResponseStatus(HttpStatus.BAD_REQUEST)
     @ExceptionHandler(MethodArgumentNotValidException.class)
@@ -78,4 +83,5 @@ public class ClientDTO {
     public void setCpf(String cpf) {
         this.cpf = cpf;
     }
+
 }

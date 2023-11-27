@@ -8,7 +8,7 @@ public class Delivery {
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
     @Column(name = "id", nullable = false)
     private Long id;
-
+    @Enumerated(EnumType.STRING)
     private MetodoEntrega metodoEntrega;
 
     private String DeliveryName;

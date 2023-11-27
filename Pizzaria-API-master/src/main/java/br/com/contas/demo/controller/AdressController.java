@@ -17,7 +17,7 @@ import java.util.List;
 @RestController
 @RequestMapping("/Adress")
 public class AdressController {
-
+//aaaa
     @Autowired
     private AdressService service;
 
@@ -32,7 +32,7 @@ public class AdressController {
         return service.create(adressDTO);
     }
 
-    @PutMapping("/update")
+    @PutMapping("/update/id")
     public ResponseEntity<Object> update(@RequestBody AdressDTO adressDTO, @RequestParam Long id){
         return service.update(id, adressDTO);
     }

@@ -30,9 +30,10 @@ public class AdressService {
             return objectResponseEntity;
         } else {
             Adress adress = adress_update.get();
-            BeanUtils.copyProperties(adressDTO, adress);
-            return ResponseEntity.ok(adress_update);
+            BeanUtils.copyProperties(adressDTO,adress);
+            repository.save(adress);
 
+            return ResponseEntity.ok(adress_update);
         }
 
     }

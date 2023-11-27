@@ -25,7 +25,7 @@ public class OrdersDTO {
 
         this.payment = payment;
         this.status = status;
-        Description = description;
+        this.Description = description;
         this.cliente = cliente;
         this.items = items;
     }
