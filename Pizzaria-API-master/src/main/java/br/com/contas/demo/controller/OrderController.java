@@ -17,6 +17,7 @@ import java.util.List;
 
 @Controller
 @RestController
+@CrossOrigin(origins = "*")
 @RequestMapping("/Order")
 public class OrderController {
 
@@ -29,7 +30,9 @@ public class OrderController {
         return service.Findall();
     }
 
+
     @GetMapping("/nome/{status}")
+
     public List<Orders> findByStatus(@RequestParam Status status) {
         return service.findByStatus(status);
     }

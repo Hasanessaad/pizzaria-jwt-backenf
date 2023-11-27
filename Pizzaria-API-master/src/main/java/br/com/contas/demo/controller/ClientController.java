@@ -16,6 +16,7 @@ import java.util.Optional;
 
 @Controller
 @RestController
+@CrossOrigin(origins = "*")
 @RequestMapping("/client")
 public class ClientController {
 
@@ -34,24 +35,31 @@ public class ClientController {
         return service.FindByName(nome);
     }
 
-    @PostMapping("/create")
-    public ResponseEntity<Client> create(@Valid @RequestBody ClientDTO clientDTO) {
+
+    @PostMapping
+
+    public Client create(@Valid @RequestBody
+                         ClientDTO clientDTO) {
+
         return service.create(clientDTO);
+
     }
 
-    @PutMapping("/update/id")
+    @PutMapping("/update")
     public ResponseEntity<Client> update(@RequestBody ClientDTO clientDTO, @RequestParam Long id) {
         ResponseEntity<Client> resposta = service.update(id, clientDTO);
         return new ResponseEntity<Client>(HttpStatus.OK);
     }
 
-    @DeleteMapping("delete/id")
+
+    @DeleteMapping
     public ResponseEntity<Object> Delete(@RequestParam long id) {
 
         return service.delete(id);
     }
 
     @PutMapping("/adress")
+
     public ResponseEntity<Object> addAdress(@RequestBody AdressDTO adressDTO, @RequestParam Long id) {
         Client cliente = service.AddAdress(id, adressDTO);
 

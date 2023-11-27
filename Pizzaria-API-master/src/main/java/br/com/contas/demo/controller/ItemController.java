@@ -17,6 +17,7 @@ import java.util.Optional;
 
 @Controller
 @RestController
+@CrossOrigin(origins = "*")
 @RequestMapping("/Item")
 public class ItemController {
 
@@ -29,13 +30,21 @@ public class ItemController {
         return service.Findall();
     }
 
+
+    @GetMapping("/codigo")
+    public Optional<Item> FindByCOdigo(@RequestParam String codigo) {
+        return service.FindByCodigo(codigo);
+    }
+
     @GetMapping("/codigo")
     public Optional<Item> FindByCOdigo(@RequestParam String codigo) {
         return service.FindByCodigo(codigo);
     }
 
     @PostMapping("/create")
-    public ResponseEntity<Item> create(@RequestBody ItemDTO itemDTO) {
+
+    public ResponseEntity<Item> create(@RequestBody
+                                          ItemDTO itemDTO) {
 
         return service.create(itemDTO);
     }
@@ -45,17 +54,12 @@ public class ItemController {
         return service.update(id, itemDTO);
     }
 
+
     @DeleteMapping
     public ResponseEntity<Object> Delete(@RequestParam long id) {
 
         return service.delete(id);
-    }
 
-    @PutMapping("/sabor")
-    public ResponseEntity<Object> AddSabor(@RequestBody SaborDTO saborDTO, @RequestParam Long id) {
-        Item item = service.AddSabor(id, saborDTO);
-
-        return ResponseEntity.ok(item);
     }
 
 

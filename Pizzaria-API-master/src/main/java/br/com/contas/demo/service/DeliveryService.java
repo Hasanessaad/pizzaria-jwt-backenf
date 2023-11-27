@@ -22,17 +22,21 @@ public class DeliveryService {
         this.repository = repository;
     }
 
-    public List<Delivery> Findall() { return repository.findAll();}
+    public List<Delivery> Findall() {
+        return repository.findAll();
+    }
 
-    public List<Delivery> FindByMetodoEntrega(MetodoEntrega name) { return repository.findByMetodoEntrega(name);}
+    public List<Delivery> FindByMetodoEntrega(MetodoEntrega name) {
+        return repository.findByMetodoEntrega(name);
+    }
 
-    public Delivery update (Long id, DeliveryDTO deliveryDTO){
+    public Delivery update(Long id, DeliveryDTO deliveryDTO) {
         Optional<Delivery> delivery_update = repository.findById(id);
-        if ( delivery_update.isEmpty()) {
-            throw  new RuntimeException("Entrega nao econtrada");
+        if (delivery_update.isEmpty()) {
+            throw new RuntimeException("Entrega nao econtrada");
         } else {
             Delivery delivery = delivery_update.get();
-            BeanUtils.copyProperties(deliveryDTO,delivery);
+            BeanUtils.copyProperties(deliveryDTO, delivery);
             repository.save(delivery);
             return delivery;
 
@@ -40,7 +44,7 @@ public class DeliveryService {
 
     }
 
-    public Delivery create(DeliveryDTO deliveryDTO){
+    public Delivery create(DeliveryDTO deliveryDTO) {
 
         try {
             Delivery delivery = new Delivery();
@@ -55,21 +59,18 @@ public class DeliveryService {
     }
 
 
-    public ResponseEntity<String> delete ( Long id){
-        Optional<Delivery> delivery_optional = repository.findById(id) ;
-        if ( delivery_optional.isEmpty()) {
+    public ResponseEntity<String> delete(Long id) {
+        Optional<Delivery> delivery_optional = repository.findById(id);
+        if (delivery_optional.isEmpty()) {
             throw new RuntimeException();
         } else {
-        Delivery delivery = delivery_optional.get();
-        repository.delete(delivery);
-        return new ResponseEntity<>("Delivery deletado", HttpStatus.OK);
+            Delivery delivery = delivery_optional.get();
+            repository.delete(delivery);
+            return new ResponseEntity<>("Delivery deletado", HttpStatus.OK);
 
         }
 
     }
-
-
-
 
 
 }

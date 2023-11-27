@@ -17,28 +17,29 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+
 @Data
 public class ClientDTO {
     @Valid
 
 
     @Size(min = 3, max = 30, message = "tamanho do nome invalido")
-    @NotNull( message = "nome nao pode ser nulo")
+    @NotNull(message = "nome nao pode ser nulo")
 
     private String nome;
 
     @Size(max = 13, message = "Formato invalido")
     @NotNull(message = "numero nao pode ser nulo")
     private String phone;
-    @CPF( message = "formato invalido")
-    private  String cpf;
+    @CPF(message = "formato invalido")
+    private String cpf;
 
 
 
     @ResponseStatus(HttpStatus.BAD_REQUEST)
     @ExceptionHandler(MethodArgumentNotValidException.class)
-    public Map<String, String> handleValidationException (MethodArgumentNotValidException exception){
-        Map<String,String> errors = new HashMap<>();
+    public Map<String, String> handleValidationException(MethodArgumentNotValidException exception) {
+        Map<String, String> errors = new HashMap<>();
         exception.getBindingResult().getAllErrors().forEach((error) -> {
             String fieldname = ((FieldError) error).getField();
             String errorMessage = error.getDefaultMessage();
@@ -46,7 +47,10 @@ public class ClientDTO {
         });
 
         return errors;
-    };
+    }
+
+    ;
+
     public ClientDTO() {
     }
 

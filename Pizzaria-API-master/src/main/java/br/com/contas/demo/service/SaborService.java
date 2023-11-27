@@ -19,25 +19,29 @@ public class SaborService {
     private SaborRepository repository;
 
 
-    public List<Sabor> Findall() { return repository.findAll();}
+    public List<Sabor> Findall() {
+        return repository.findAll();
+    }
 
-    public Sabor findByNome(String name) { return repository.findByNome(name);}
+    public Sabor findByNome(String name) {
+        return repository.findByNome(name);
+    }
 
-    public ResponseEntity<Object> update (Long id, SaborDTO saborDTO){
+    public ResponseEntity<Object> update(Long id, SaborDTO saborDTO) {
         Optional<Sabor> sabor_update = repository.findById(id);
-        if ( sabor_update.isEmpty()) {
+        if (sabor_update.isEmpty()) {
             ResponseEntity<Object> objectResponseEntity = new ResponseEntity<>(HttpStatus.BAD_REQUEST);
             return objectResponseEntity;
         } else {
             Sabor sabor = sabor_update.get();
-            BeanUtils.copyProperties(saborDTO,sabor);
+            BeanUtils.copyProperties(saborDTO, sabor);
             return ResponseEntity.ok(sabor_update);
 
         }
 
     }
 
-    public ResponseEntity<Sabor> create(SaborDTO saborDTO){
+    public ResponseEntity<Sabor> create(SaborDTO saborDTO) {
 
         try {
             Sabor sabor = new Sabor();
@@ -47,30 +51,28 @@ public class SaborService {
 
             return ResponseEntity.ok(sabor);
         } catch (Exception e) {
-         return new ResponseEntity<>(HttpStatus.BAD_REQUEST);}
-
-    }
-
-
-    public ResponseEntity<Object> delete ( Long id){
-        Optional<Sabor> sabor_optional = repository.findById(id) ;
-        if ( sabor_optional.isEmpty()) {
-            ResponseEntity<Object> objectResponseEntity = new ResponseEntity<>(HttpStatus.BAD_REQUEST);
-            return objectResponseEntity;
-        } else {
-
-
-        Sabor sabor = sabor_optional.get();
-        repository.delete(sabor);
-        return ResponseEntity.ok("Sabore deletado com sucesso");
-
-
+            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
         }
 
     }
 
 
+    public ResponseEntity<Object> delete(Long id) {
+        Optional<Sabor> sabor_optional = repository.findById(id);
+        if (sabor_optional.isEmpty()) {
+            ResponseEntity<Object> objectResponseEntity = new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+            return objectResponseEntity;
+        } else {
 
+
+            Sabor sabor = sabor_optional.get();
+            repository.delete(sabor);
+            return ResponseEntity.ok("Sabore deletado com sucesso");
+
+
+        }
+
+    }
 
 
 }

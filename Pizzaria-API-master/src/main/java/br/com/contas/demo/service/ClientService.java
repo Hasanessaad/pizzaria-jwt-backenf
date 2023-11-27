@@ -57,6 +57,7 @@ public class ClientService {
 
     public ResponseEntity<Client> create(ClientDTO clientDTO) {
 
+
         try {
             Client cliente = new Client();
             BeanUtils.copyProperties(clientDTO, cliente);
@@ -66,6 +67,7 @@ public class ClientService {
             return ResponseEntity.ok(cliente);
         } catch (Exception e) {
             return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+
         }
 
     }

@@ -13,7 +13,9 @@ import java.util.List;
 
 @Controller
 @RestController
-@RequestMapping("/delivery")
+
+@CrossOrigin(origins = "*")
+@RequestMapping("/Delivery")
 public class DeliveryController {
 
     @Autowired
@@ -25,10 +27,16 @@ public class DeliveryController {
         return service.Findall();
     }
 
+
     @GetMapping("/nome")
     private ResponseEntity<List<Delivery>> findByNome(@RequestParam MetodoEntrega nome) {
         return ResponseEntity.ok(service.FindByMetodoEntrega(nome));
     }
+
+    @PostMapping
+
+    public Delivery create(@RequestBody
+                           DeliveryDTO deliveryDTO) {
 
     @PostMapping("/create")
     public Delivery create(@RequestBody DeliveryDTO deliveryDTO) {
